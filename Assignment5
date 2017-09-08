@@ -1,0 +1,49 @@
+import string
+import random
+answer = 'Y'
+upr_chr_len=0
+lwr_chr_len=0
+upr_letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+lwr_letters='abcdefghijklmnopqrstuvwxyz'
+dig_len=0
+digits ='0123456789'
+special_chars='!@#$%^&*'
+special_len=0
+while answer =='Y' or answer =='y':
+  choice = input("Simple password ro complex password ?(1/2)")
+  if choice ==1:
+      print("Generating simple password.....")
+      while(upr_chr_len+lwr_chr_len not in range(8,16)):
+        upr_chr_len = random.randint(4,10)
+        lwr_chr_len = random.randint(4,10)
+      list1= [random.choice(upr_letters) for _ in range(upr_chr_len)]
+      list2= [random.choice(lwr_letters) for _ in range(lwr_chr_len)]
+      list=list1+list2
+      random.shuffle(list)
+      print ''.join(list)
+
+  elif choice ==2:
+      print("Generating complex password....")
+      while(upr_chr_len+lwr_chr_len+dig_len+special_len not in range(8,16)):
+        upr_chr_len = random.randint(2,4)
+        lwr_chr_len = random.randint(2,4)
+        dig_len=random.randint(2,4)
+        special_len = random.randint(2,4)
+      list1= [random.choice(upr_letters) for _ in range(upr_chr_len)]
+      list2= [random.choice(lwr_letters) for _ in range(lwr_chr_len)]
+      list3= [random.choice(digits) for _ in range(dig_len)]
+      list4= [random.choice(special_chars) for _ in range(special_len)]
+      list=list1+list2+list3+list4
+      random.shuffle(list)
+      print ''.join(list)
+
+  else:
+      answer= raw_input("Wrong input. Wanna try again ? (Y/N)")
+  upr_chr_len=0
+  lwr_chr_len=0
+  dig_len=0
+  special_len=0    
+      
+
+
+
