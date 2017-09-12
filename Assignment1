@@ -1,0 +1,17 @@
+dict={'{':'}','(':')','[':']'}
+str=input("Enter the string")
+list1=[]
+for i in str:
+  if(i in (dict.keys())):
+    list1.append(i)
+  else:
+    value=list1[-1]
+    if(dict.get(value)==i):
+      list1.pop()
+    else:
+      print("False")
+      exit()
+if(list1 != []):
+  print("False")
+else:
+  print("True")
