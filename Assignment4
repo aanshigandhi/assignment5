@@ -1,0 +1,146 @@
+#ROYPO
+list1 = []
+# l_len=int(input("Enter the number of rows:"))
+# count=l_len
+# while(count>=0):
+#   str=input("Enter the string ")
+#   list1.append(str)
+#   count-=1
+# list1.append('RRBRRRBPYGPBBBGPBPPRX') #0
+# list1.append('BGYPRPYYORYPPYYRRRPPX') #1
+# list1.append('BPGROPYGRYYGPORYPBOOX') #2
+# list1.append('RBBORPYOOYRPBRGRBGPGX') #3
+# list1.append('RPYGGGPYPYOGBORYPBYOX') #4
+# list1.append('ORBGBYBPGRPYROGYGYRPX') #5
+# list1.append('BGOOOGBBROYYYYPBYYGGX') #6
+# list1.append('PPGBOPYGBROGBGROYRBRX') #7
+# list1.append('YYPPRBYBPOOGPYRPPYRYX') #8
+# list1.append('POOBBBGOYGOPBGYRRYRBX') #9
+# list1.append('PPYRBOORORYBGBGOOPBYX') #10
+# list1.append('BBRGYGPYGPRRPYGOOYRRX') #11
+# list1.append('OGRYBPYOPBRYBGPGOOBPX') #12
+# list1.append('RYGPGGORYOOGRGPPYPBGX') #13
+# list1.append('PYPROOROYRPORYPYBBYRX') #14
+# list1.append('OYPGRPRGPOBBRBOBYYBPX') #15
+# list1.append('BYYPOYOYORBRGGYGRGYGX') #16
+# list1.append('YBYYGBRROBOPPOBORRRPX') #17
+# list1.append('POOOPYGGYPOGPOBGPRPBX') #18
+# list1.append('RBBRRRRBBBYOBGPGGOOYX') #19
+# list1.append('XXXXXXXXXXXXXXXXXXXXX')
+list1.append('BOROYX')
+list1.append('ORBGRX')
+list1.append('BOGOYX')
+list1.append('YGBYGX')
+list1.append('RORBRX')
+list1.append('XXXXXX')
+
+
+# list1.append('XXXXOXXXX') #0
+# list1.append('XXXXRXXXX') #1
+# list1.append('XXXXOPYOX') #2
+# list1.append('XXXXRXXRX') #3
+# list1.append('XXYPOYPOX') #4
+# list1.append('XXOXXXXXX') #5
+# list1.append('XXRXXXXXX') #6
+# list1.append('XXXXXXXXX')
+
+#pattern = ['R','O','Y','P','O']
+pattern=['O','G']
+
+
+l_len=len(list1)
+p_len=len(pattern)
+history_row=[]
+history_col=[]
+stuck_row=0
+stuck_col=0
+rem = 0
+row=l_len-2
+col=0
+left=col-1
+right=col+1
+top=col
+bottom=col
+count=-1
+for i in list1[l_len-2]:
+  count+=1
+  if(i==pattern[0]):
+    history_row=[]
+    history_col=[]
+    stuck_row=0
+    stuck_col=0
+    rem = 1
+    row=l_len-2
+    col=count
+    left=col-1
+    right=col+1
+    top=col
+    bottom=col
+    history_row.append(row)
+    history_col.append(col)
+    while(row>=1 ):
+    
+      if((list1[row-1][col]==pattern[rem%p_len]) and (row-1 !=stuck_row or col!=stuck_col)):
+        row=row-1
+        rem+=1
+        history_row.append(row)
+        history_col.append(col)
+        stuck_row=0
+        stuck_col=0
+      elif(list1[row][right]==pattern[rem%p_len] and (row !=stuck_row or right!=stuck_col)):   
+        col=right
+        left=col-1
+        right=col+1
+        top=col
+        bottom=col
+        rem+=1
+        history_row.append(row)
+        history_col.append(col)  
+      elif(list1[row][left]==pattern[rem%p_len] and (row !=stuck_row or left!=stuck_col)):
+        col=left
+        left=col-1
+        right=col+1
+        top=col
+        bottom=col
+        rem+=1
+        history_row.append(row)
+        history_col.append(col)  
+        stuck_row=0
+        stuck_col=0
+        stuck_row=0
+        stuck_col=0
+      elif(list1[row+1][bottom]==pattern[rem%p_len] and (row !=stuck_row or bottom!=stuck_col) ):
+        row+=1
+        col=bottom
+        left = col-1
+        right = col+1
+        top=col
+        bottom=col
+        rem+=1
+        history_row.append(row)
+        history_col.append(col)
+        stuck_row=0
+        stuck_col=0
+      else:
+        rem-=1
+        stuck_row=row
+        stuck_col=col
+        del history_col[-1]
+        del history_row[-1]
+        if(history_row==[]):
+           print("No solution")
+           break
+        row = history_row[-1]
+        col=history_col[-1]
+    print(list(zip(history_row,history_col)))
+
+
+
+
+
+
+    
+
+
+
+
